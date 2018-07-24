@@ -4,12 +4,13 @@
   padding: 0;
 }
 
-#root {
+main {
   display: flex;
   flex-wrap: wrap;
 }
 
-header {
+header,
+footer {
   background-color: #000;
   color: #fff;
   width: 100%;
@@ -22,4 +23,16 @@ header {
   text-align: center;
   font-weight: 900;
   margin: 8px 0 4px 0;
+}
+
+.elements-list-container {
+  width: 80%;
+  height: calc(100vh - 88px);
+  background-color: #000;
+}
+
+.footer {
+  font-size: 14px;
+  margin: 15px 0;
+  text-align: center;
 }
