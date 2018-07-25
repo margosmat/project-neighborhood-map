@@ -31,6 +31,10 @@ footer {
   background-color: #000;
 }
 
+.filter-input {
+  width: calc(100% - 4px);
+}
+
 .footer {
   font-size: 14px;
   margin: 15px 0;
