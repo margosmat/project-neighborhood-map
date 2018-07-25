@@ -26,9 +26,27 @@ footer {
 }
 
 .elements-list-container {
-  width: 80%;
+  width: 250px;
   height: calc(100vh - 88px);
   background-color: #000;
+  transform: translate(-250px, 0);
+  border: 0;
+}
+
+.elements-list-container.elements-list-opened {
+  transform: translate(0, 0);
+}
+
+.nav-button {
+  position: absolute;
+  border: 0;
+  outline: none;
+  width: 20px;
+  height: 40px;
+  border-radius: 0 15px 15px 0;
+  background-color: #000;
+  color: #fff;
+  transform: translate(250px, 0);
 }
 
 .filter-input {
