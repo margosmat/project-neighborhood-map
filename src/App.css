@@ -18,11 +18,11 @@ footer {
 }
 
 .header {
-  font-size: 32px;
+  font-size: 28px;
   font-family: 'Josefin Sans', sans-serif;
   text-align: center;
   font-weight: 900;
-  margin: 8px 0 4px 0;
+  margin: 10px 0 4px 0;
 }
 
 .elements-list-container {
@@ -51,6 +51,7 @@ footer {
   color: #fff;
   transform: translate(250px, 0);
   z-index: 1000;
+  top: 70px;
 }
 
 .filter-input {
@@ -66,7 +67,7 @@ footer {
 
 .footer {
   font-size: 14px;
-  margin: 15px 0;
+  margin: 13px 0;
   text-align: center;
   color: #fff;
 }
