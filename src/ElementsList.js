@@ -14,6 +14,7 @@ class ElementsList extends Component {
                     }}>
                     <i className='fas fa-bars'></i>
                 </button>
+                <div className='elements-list'>
                 <input
                     className='filter-input'
                     type='text'
@@ -22,10 +23,11 @@ class ElementsList extends Component {
                 <ul className='places-list'>
                     {this.props.places.length && this.props.places.sort(sortBy('name')).map((place) => (
                         <li key={place.id}>
-                            {place.name}
+                            <a>{place.name}</a>
                         </li>
                     ))}
                 </ul>
+                </div>
             </div>
         )
     }
