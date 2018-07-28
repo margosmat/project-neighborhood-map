@@ -11,7 +11,10 @@ class MainWindow extends Component {
                 </header>
                 <ElementsList />
                 <div id='map'>
-                    <MapContainer />
+                    <MapContainer 
+                        places={this.props.places}
+                        fetchPlaces={this.props.fetchPlaces}
+                        createMarkersForPlaces={this.props.createMarkersForPlaces}/>
                 </div>
                 <footer>
                     <p className='footer'>Made with <b className='far fa-heart'></b> by Mateusz Margos</p>
