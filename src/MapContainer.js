@@ -35,7 +35,7 @@ export class MapContainer extends Component {
                         marker={this.props.activeMarker}
                         visible={this.props.activeMarker !== null}>
                             <div>
-                            <h1>{this.props.activeMarker.name}</h1>
+                            <p>{this.props.activeMarker.name}</p>
                             </div>
                     </InfoWindow>
                 </Map>

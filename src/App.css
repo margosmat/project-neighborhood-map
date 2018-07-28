@@ -36,6 +36,10 @@ footer {
   z-index: 1000;
 }
 
+.places-list {
+  color: #fff;
+}
+
 .elements-list-container.elements-list-opened {
   transform: translate(0, 0);
 }

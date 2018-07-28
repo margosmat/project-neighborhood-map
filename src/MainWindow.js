@@ -9,7 +9,8 @@ class MainWindow extends Component {
                 <header>
                     <h1 className='header'>Neighborhood Map</h1>
                 </header>
-                <ElementsList />
+                <ElementsList 
+                    places={this.props.places}/>
                 <div id='map'>
                     <MapContainer 
                         places={this.props.places}

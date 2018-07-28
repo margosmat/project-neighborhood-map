@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
+import sortBy from 'sort-by'
 
 class ElementsList extends Component {
     render() {
@@ -18,8 +19,12 @@ class ElementsList extends Component {
                     type='text'
                     placeholder='Filter places'
                 />
-                <ul>
-
+                <ul className='places-list'>
+                    {this.props.places.length && this.props.places.sort(sortBy('name')).map((place) => (
+                        <li key={place.id}>
+                            {place.name}
+                        </li>
+                    ))}
                 </ul>
             </div>
         )
