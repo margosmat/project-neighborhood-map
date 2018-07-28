@@ -4,30 +4,17 @@ import MainWindow from './MainWindow'
 
 class App extends Component {
   state = {
-    places: []
+    places: [],
+    activeMarker: {}
   }
 
-  createMarkersForPlaces = function(google, map, places) {
-      let tempPlaceMarkers = [];
-      for (let i = 0; i < places.length; i++)
-      {
-          var place = places[i];
-          var marker = new google.maps.Marker({
-              map: map,
-              title: place.name,
-              position: place.geometry.location,
-              id: place.id
-          });
-          
-          tempPlaceMarkers.push(marker);
-      }
-      
-      () => this.setState({
-        places: tempPlaceMarkers
-      });
+  setActiveMarker = (marker) => {
+    this.setState({
+      activeMarker: marker
+    })
   }
 
-  fetchPlaces(mapProps, map) {
+  fetchPlaces = (mapProps, map) => {
     const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
     const self = this;
@@ -36,7 +23,9 @@ class App extends Component {
         location: map.center
     }, function(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          self.createMarkersForPlaces(google, map, results)
+          self.setState((state) => ({
+            places: state.places.concat(results)
+          }))
         }
     })
   }
@@ -46,7 +35,9 @@ class App extends Component {
       <MainWindow 
         places={this.state.places}
         fetchPlaces={this.fetchPlaces}
-        createMarkersForPlaces={this.createMarkersForPlaces}/>
+        createMarkersForPlaces={this.createMarkersForPlaces}
+        setActiveMarker={this.setActiveMarker}
+        activeMarker={this.state.activeMarker}/>
     );
   }
 }

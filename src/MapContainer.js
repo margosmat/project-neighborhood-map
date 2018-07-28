@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Marker, Map, GoogleApiWrapper } from 'google-maps-react';
+import { InfoWindow, Marker, Map, GoogleApiWrapper } from 'google-maps-react';
 
 export class MapContainer extends Component {
-    state = {
-        placeMarkers: []
+    onMarkerClick = (props, marker, e) => {
+        this.props.setActiveMarker(marker);
     }
     
     render() {
@@ -11,7 +11,6 @@ export class MapContainer extends Component {
             width: '100%',
             height: 'calc(100vh - 88px)'
         }
-        
         return (
             <div>
                 <Map
@@ -27,10 +26,18 @@ export class MapContainer extends Component {
                     >
                     {this.props.places.length && this.props.places.map((marker) => (
                         <Marker
-                            name={marker.title}
-                            position={marker.position}
+                            name={marker.name}
+                            position={marker.geometry.location}
+                            onClick={this.onMarkerClick}
                         />
                     ))}
+                    <InfoWindow
+                        marker={this.props.activeMarker}
+                        visible={this.props.activeMarker !== null}>
+                            <div>
+                            <h1>{this.props.activeMarker.name}</h1>
+                            </div>
+                    </InfoWindow>
                 </Map>
             </div>
         )

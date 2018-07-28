@@ -14,7 +14,9 @@ class MainWindow extends Component {
                     <MapContainer 
                         places={this.props.places}
                         fetchPlaces={this.props.fetchPlaces}
-                        createMarkersForPlaces={this.props.createMarkersForPlaces}/>
+                        createMarkersForPlaces={this.props.createMarkersForPlaces}
+                        setActiveMarker={this.props.setActiveMarker}
+                        activeMarker={this.props.activeMarker}/>
                 </div>
                 <footer>
                     <p className='footer'>Made with <b className='far fa-heart'></b> by Mateusz Margos</p>
