@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import MainWindow from './MainWindow'
+import gambler from './img/gambler.png'
+import gamblerheart from './img/gamblerheart.png'
 
 class App extends Component {
   state = {
@@ -14,6 +16,17 @@ class App extends Component {
     })
   }
 
+  changeActiveMarkerIcon = (markerName) => {
+    this.state.places.map((place) => place.icon = gambler);
+    let activeMarker = (this.state.places.filter((place) => place.name === markerName))[0];
+    activeMarker.icon = gamblerheart;
+    let modifiedPlaces = this.state.places.filter((place) => place.name !== markerName).concat(activeMarker);
+    this.setState({
+      places: modifiedPlaces
+    })
+    
+  }
+
   fetchPlaces = (mapProps, map) => {
     const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
@@ -22,10 +35,11 @@ class App extends Component {
         type: 'casino',
         location: map.center
     }, function(results, status) {
+        let modifiedResults = results.map((result) => result.icon = gambler);
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          self.setState((state) => ({
-            places: state.places.concat(results)
-          }))
+          self.setState({
+            places: results
+          })
         }
     })
   }
@@ -37,7 +51,8 @@ class App extends Component {
         fetchPlaces={this.fetchPlaces}
         createMarkersForPlaces={this.createMarkersForPlaces}
         setActiveMarker={this.setActiveMarker}
-        activeMarker={this.state.activeMarker}/>
+        activeMarker={this.state.activeMarker}
+        changeActiveMarkerIcon={this.changeActiveMarkerIcon}/>
     );
   }
 }

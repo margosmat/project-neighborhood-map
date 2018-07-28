@@ -50,21 +50,26 @@ footer {
 }
 
 .places-list li {
-  color: #000;
-  background-color: #F7F9F3;
-  margin: 5px auto;
-  border: 1px solid #888;
-  border-radius: 15px;
-  height: 44px;
+  
   width: 90%;
-  text-align: center;
+  margin: 5px auto;
 }
 
-.places-list li a {
-  margin: 5px 10px;
+.places-list li button {
   font-size: 13px;
   font-weight: 600;
   font-family: 'Josefin Sans', sans-serif;
+  color: #000;
+  background-color: #F7F9F3;
+  border: 1px solid #888;
+  border-radius: 15px;
+  height: 44px;
+  width: 100%;
+  text-align: center;
+}
+
+.places-list li button:active {
+  transform: translateY(1px);
 }
 
 .elements-list-container.elements-list-opened {

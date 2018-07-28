@@ -10,7 +10,8 @@ class MainWindow extends Component {
                     <h1 className='header'>Neighborhood Map</h1>
                 </header>
                 <ElementsList 
-                    places={this.props.places}/>
+                    places={this.props.places}
+                    changeActiveMarkerIcon={this.props.changeActiveMarkerIcon}/>
                 <div id='map'>
                     <MapContainer 
                         places={this.props.places}

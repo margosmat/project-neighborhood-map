@@ -29,13 +29,14 @@ export class MapContainer extends Component {
                             name={marker.name}
                             position={marker.geometry.location}
                             onClick={this.onMarkerClick}
+                            icon={marker.icon}
                         />
                     ))}
                     <InfoWindow
                         marker={this.props.activeMarker}
                         visible={this.props.activeMarker !== null}>
                             <div>
-                            <p>{this.props.activeMarker.name}</p>
+                                <p>{this.props.activeMarker.name}</p>
                             </div>
                     </InfoWindow>
                 </Map>

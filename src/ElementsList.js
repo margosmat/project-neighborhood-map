@@ -23,7 +23,12 @@ class ElementsList extends Component {
                 <ul className='places-list'>
                     {this.props.places.length && this.props.places.sort(sortBy('name')).map((place) => (
                         <li key={place.id}>
-                            <a>{place.name}</a>
+                            <button onClick={() => {
+                                $('.elements-list-container').toggleClass('elements-list-opened');
+                                $('.nav-button').toggleClass('elements-list-opened');
+
+                                this.props.changeActiveMarkerIcon(place.name);
+                            }}>{place.name}</button>
                         </li>
                     ))}
                 </ul>
