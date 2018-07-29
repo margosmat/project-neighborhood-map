@@ -76,6 +76,17 @@ footer {
   transform: translate(0, 0);
 }
 
+.contributions {
+  width: 90%;
+  margin: 5px auto;
+  background-color: #F7F9F3;
+  border: 1px solid #888;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 10px;
+
+}
+
 .nav-button {
   position: absolute;
   border: 0;
