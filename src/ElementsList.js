@@ -19,15 +19,17 @@ class ElementsList extends Component {
                     className='filter-input'
                     type='text'
                     placeholder='Filter places'
+                    value={this.props.query}
+                    onChange={(event) => this.props.updateQuery(event.target.value)}
                 />
                 <ul className='places-list'>
-                    {this.props.places.length && this.props.places.sort(sortBy('title')).map((place) => (
-                        <li key={place.id}>
+                    {this.props.places.length && this.props.places.sort(sortBy('name')).map((place) => (
+                        <li key={place.name}>
                             <button onClick={() => {
                                 $('.elements-list-container').toggleClass('elements-list-opened');
                                 $('.nav-button').toggleClass('elements-list-opened');
 
-                                this.props.setActiveMarkerFromName(place.title);
+                                this.props.setActiveMarkerFromName(place.name);
                             }}>{place.title}</button>
                         </li>
                     ))}
