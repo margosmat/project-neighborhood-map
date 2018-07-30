@@ -11,7 +11,7 @@ class MainWindow extends Component {
                 </header>
                 <ElementsList 
                     places={this.props.places}
-                    changeActiveMarkerIcon={this.props.changeActiveMarkerIcon}/>
+                    setActiveMarkerFromName={this.props.setActiveMarkerFromName}/>
                 <div id='map'>
                     <MapContainer 
                         places={this.props.places}

@@ -11,20 +11,53 @@ class App extends Component {
   }
 
   setActiveMarker = (marker) => {
+    this.state.places.map((place) => place.setIcon(gambler));
+    
     this.setState({
       activeMarker: marker
     })
   }
 
-  changeActiveMarkerIcon = (markerName) => {
-    this.state.places.map((place) => place.icon = gambler);
-    let activeMarker = (this.state.places.filter((place) => place.name === markerName))[0];
-    activeMarker.icon = gamblerheart;
-    let modifiedPlaces = this.state.places.filter((place) => place.name !== markerName).concat(activeMarker);
+  setActiveMarkerFromLatLng = (latLng) => {
+    this.state.places.map((place) => place.setIcon(gambler));
+    let activeMarker = (this.state.places.filter((place) => place.position.lat === latLng.lat))[0];
+    activeMarker.setIcon(gamblerheart);
     this.setState({
-      places: modifiedPlaces
+      activeMarker: activeMarker
     })
+  }
+
+  setActiveMarkerFromName = (markerName) => {
+    this.state.places.map((place) => place.setIcon(gambler));
+    let activeMarker = (this.state.places.filter((place) => place.title === markerName))[0];
+    activeMarker.setIcon(gamblerheart);
+    let modifiedPlaces = this.state.places.filter((place) => place.title !== markerName).concat(activeMarker);
+    this.setState({
+      places: modifiedPlaces,
+      activeMarker: activeMarker
+    })
+  }
+
+  createMarkersForPlaces = function(google, map, places) {
+    let tempPlaceMarkers = [];
+    for (let i = 0; i < places.length; i++)
+    {
+        var place = places[i];
+        var marker = new google.maps.Marker({
+            map: map,
+            title: place.name,
+            position: place.geometry.location,
+            icon: gambler
+        });
+        
+        marker.addListener('click', (e) => this.setActiveMarkerFromLatLng(e.latLng))
+
+        tempPlaceMarkers.push(marker);
+    }
     
+    this.setState({
+      places: tempPlaceMarkers
+    });
   }
 
   fetchPlaces = (mapProps, map) => {
@@ -35,11 +68,9 @@ class App extends Component {
         type: 'casino',
         location: map.center
     }, function(results, status) {
-        let modifiedResults = results.map((result) => result.icon = gambler);
+        results.map((result) => result.icon = gambler);
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          self.setState({
-            places: results
-          })
+          self.createMarkersForPlaces(google, map, results);
         }
     })
   }
@@ -52,7 +83,7 @@ class App extends Component {
         createMarkersForPlaces={this.createMarkersForPlaces}
         setActiveMarker={this.setActiveMarker}
         activeMarker={this.state.activeMarker}
-        changeActiveMarkerIcon={this.changeActiveMarkerIcon}/>
+        setActiveMarkerFromName={this.setActiveMarkerFromName}/>
     );
   }
 }

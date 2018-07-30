@@ -21,18 +21,18 @@ class ElementsList extends Component {
                     placeholder='Filter places'
                 />
                 <ul className='places-list'>
-                    {this.props.places.length && this.props.places.sort(sortBy('name')).map((place) => (
+                    {this.props.places.length && this.props.places.sort(sortBy('title')).map((place) => (
                         <li key={place.id}>
                             <button onClick={() => {
                                 $('.elements-list-container').toggleClass('elements-list-opened');
                                 $('.nav-button').toggleClass('elements-list-opened');
 
-                                this.props.changeActiveMarkerIcon(place.name);
-                            }}>{place.name}</button>
+                                this.props.setActiveMarkerFromName(place.title);
+                            }}>{place.title}</button>
                         </li>
                     ))}
                 </ul>
-                <div className='contributions'>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                <div className='contributions'>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" rel="noopener noreferrer">CC 3.0 BY</a></div>
                 </div>
             </div>
         )
