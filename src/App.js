@@ -119,6 +119,7 @@ class App extends Component {
 
   createInfoWindow = () => {
     let infoWindow = new this.state.google.maps.InfoWindow();
+    infoWindow.setOptions({maxWidth: 250});
 
     this.setState({
       infoWindow: infoWindow
@@ -134,11 +135,45 @@ class App extends Component {
     }
 
     this.state.infoWindow.close();
+    this.getActivePlaceAdditionalInformation();
+  }
 
+  getActivePlaceAdditionalInformation = () => {
+    let casinoId;
+    let venueTip = "Couldn't get additional information regarding this venue.";
+    let self = this;
+
+    fetch(`https://api.foursquare.com/v2/venues/search?ll=${this.state.activeMarker.position.lat()},${this.state.activeMarker.position.lng()}&intent=match&name=${this.state.activeMarker.name}&client_id=5QHRGKMWQFHFXKIN5PJ0RZLGZG3WBXU3CBRAADC3PMN1VGHZ&client_secret=4WG51XWB0RESPAUDETZOURFHV1EDQAFVNSR01F4WT3HOFLKA&v=20180731`)
+      .then(response => response.json())
+      .then(function(response) {
+        if (response.meta.code === 200) {
+          casinoId = response.response.venues[0].id;
+          return fetch(`https://api.foursquare.com/v2/venues/${casinoId}/tips?sort=popular&client_id=5QHRGKMWQFHFXKIN5PJ0RZLGZG3WBXU3CBRAADC3PMN1VGHZ&client_secret=4WG51XWB0RESPAUDETZOURFHV1EDQAFVNSR01F4WT3HOFLKA&v=20180731`);
+        }})
+      .then(tips => tips.json())
+      .then(function(tips) {
+        console.log(tips);
+        if (tips.meta.code === 200 && tips.response.tips.count > 0) {
+          venueTip = '<b>Most popular review:</b> ' + tips.response.tips.items[0].text;
+        }
+        self.fillActivePlaceInfoWindow(self.state.activeMarker.name, venueTip);
+      })
+      .catch(function(response) {
+        console.log('failed' + response);
+      });
+  }
+
+  fillActivePlaceInfoWindow = (name, popularReview) => {
     const details = document.createElement('div');
-    const placeName = document.createElement('p');
-    placeName.innerHTML = this.state.activeMarker.name;
+    details.className = 'info-window';
+
+    const placeName = document.createElement('h4');
+    placeName.innerHTML = name;
     details.append(placeName);
+
+    const additionalInfo = document.createElement('p');
+    additionalInfo.innerHTML = popularReview;
+    details.append(additionalInfo);
 
     this.state.infoWindow.setContent(details);
     this.state.infoWindow.open(this.state.map, this.state.activeMarker);

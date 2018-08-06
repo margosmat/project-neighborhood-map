@@ -112,6 +112,10 @@ footer {
   display: block;
 }
 
+.info-window {
+  width: 90%;
+}
+
 .footer {
   font-size: 14px;
   margin: 13px 0;
