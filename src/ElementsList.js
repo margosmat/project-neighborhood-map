@@ -9,6 +9,7 @@ class ElementsList extends Component {
             <div className='elements-list-container'>
                 <button 
                     className='nav-button'
+                    tabIndex='0'
                     onClick={() => {
                         $('.elements-list-container').toggleClass('elements-list-opened');
                         $('.nav-button').toggleClass('elements-list-opened');
@@ -22,8 +23,12 @@ class ElementsList extends Component {
                         placeholder='Filter places'
                         value={this.props.query}
                         onChange={(event) => this.props.updateQuery(event.target.value)}
+                        onFocusCapture={() => {
+                            $('.elements-list-container').toggleClass('elements-list-opened');
+                            $('.nav-button').toggleClass('elements-list-opened');
+                        }}
                     />
-                    <ul className='places-list'>
+                    <ul className='places-list' aria-label='places'>
                         {this.props.places.length && this.props.places.sort(sortBy('name')).map((place) => (
                             <li key={place.name}>
                                 <button onClick={() => {

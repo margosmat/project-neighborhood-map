@@ -12,7 +12,7 @@ export class MapContainer extends Component {
             height: 'calc(100vh - 88px)'
         }
         return (
-            <div>
+            <div role='application'>
                 <Map
                     google={this.props.google}
                     style={style}
