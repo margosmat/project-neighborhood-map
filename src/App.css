@@ -77,7 +77,6 @@ footer {
 }
 
 .contributions {
-  width: 90%;
   margin: 5px auto;
   background-color: #F7F9F3;
   border: 1px solid #888;
@@ -85,6 +84,11 @@ footer {
   text-align: center;
   font-size: 10px;
 
+}
+
+.foursquare-attribution {
+  width: 90%;
+  margin: 5px auto;
 }
 
 .nav-button {
@@ -113,7 +117,8 @@ footer {
 }
 
 .info-window {
-  width: 90%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .footer {

@@ -141,29 +141,33 @@ class App extends Component {
   getActivePlaceAdditionalInformation = () => {
     let casinoId;
     let venueTip = "Couldn't get additional information regarding this venue.";
+    let venueLink = '';
     let self = this;
 
     fetch(`https://api.foursquare.com/v2/venues/search?ll=${this.state.activeMarker.position.lat()},${this.state.activeMarker.position.lng()}&intent=match&name=${this.state.activeMarker.name}&client_id=5QHRGKMWQFHFXKIN5PJ0RZLGZG3WBXU3CBRAADC3PMN1VGHZ&client_secret=4WG51XWB0RESPAUDETZOURFHV1EDQAFVNSR01F4WT3HOFLKA&v=20180731`)
       .then(response => response.json())
       .then(function(response) {
-        if (response.meta.code === 200) {
+        if (response.meta.code === 200 && response.response.venues.length > 0) {
           casinoId = response.response.venues[0].id;
+          venueLink = 'http://foursquare.com/v/' + casinoId;
           return fetch(`https://api.foursquare.com/v2/venues/${casinoId}/tips?sort=popular&client_id=5QHRGKMWQFHFXKIN5PJ0RZLGZG3WBXU3CBRAADC3PMN1VGHZ&client_secret=4WG51XWB0RESPAUDETZOURFHV1EDQAFVNSR01F4WT3HOFLKA&v=20180731`);
-        }})
+        } else {
+          self.fillActivePlaceInfoWindow(self.state.activeMarker.name, venueTip, venueLink);
+        }
+      })
       .then(tips => tips.json())
       .then(function(tips) {
-        console.log(tips);
         if (tips.meta.code === 200 && tips.response.tips.count > 0) {
           venueTip = '<b>Most popular review:</b> ' + tips.response.tips.items[0].text;
         }
-        self.fillActivePlaceInfoWindow(self.state.activeMarker.name, venueTip);
+        self.fillActivePlaceInfoWindow(self.state.activeMarker.name, venueTip, venueLink);
       })
       .catch(function(response) {
         console.log('failed' + response);
       });
   }
 
-  fillActivePlaceInfoWindow = (name, popularReview) => {
+  fillActivePlaceInfoWindow = (name, popularReview, venueLink) => {
     const details = document.createElement('div');
     details.className = 'info-window';
 
@@ -174,6 +178,15 @@ class App extends Component {
     const additionalInfo = document.createElement('p');
     additionalInfo.innerHTML = popularReview;
     details.append(additionalInfo);
+
+    if (venueLink !== '') {
+      const venueLinkElement = document.createElement('a');
+      venueLinkElement.innerHTML = "Venue page on Foursquare";
+      venueLinkElement.href = venueLink;
+      venueLinkElement.setAttribute('aria-label', `View details of the ${name}`);
+      venueLinkElement.target = '_blank';
+      details.append(venueLinkElement);
+    }
 
     this.state.infoWindow.setContent(details);
     this.state.infoWindow.open(this.state.map, this.state.activeMarker);
