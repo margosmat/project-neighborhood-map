@@ -17,6 +17,7 @@ class App extends Component {
     google: {}
   }
 
+  // Function that hides elements list and sets active marker to null on map click
   onMapClick = () => {
     this.state.places.map((place) => place.setIcon(gambler));
     if (this.state.infoWindow !== null) this.state.infoWindow.close();
@@ -29,6 +30,7 @@ class App extends Component {
     });
   }
 
+  // Function that sets active marker from LatLng object
   setActiveMarkerFromLatLng = (latLng) => {
     this.state.places.map((place) => place.setIcon(gambler));
     let activeMarker = (this.state.places.filter((place) => place.position.lat === latLng.lat))[0];
@@ -38,6 +40,7 @@ class App extends Component {
     }, this.openInfoWindow)
   }
 
+  // Function that sets active marker from casino name
   setActiveMarkerFromName = (markerName) => {
     this.state.places.map((place) => place.setIcon(gambler));
     let activeMarker = (this.state.places.filter((place) => place.name === markerName))[0];
@@ -49,6 +52,7 @@ class App extends Component {
     }, this.openInfoWindow)
   }
 
+  // Function that creates array of markers from fetched places
   createMarkersForPlaces = function(google, map, places) {
     let tempPlaceMarkers = [];
     for (let i = 0; i < places.length; i++)
@@ -74,6 +78,7 @@ class App extends Component {
     });
   }
 
+  // Function that fetch specified places on current map
   fetchPlaces = (mapProps, map) => {
     const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
@@ -89,12 +94,14 @@ class App extends Component {
     })
   }
 
+  // Function that updates query from filter input
   updateQuery = (query) => {
     this.setState({
       query: query
     }, this.updateMarkers)
   }
 
+  // Function that filters visible markers based on the filter query
   updateMarkers = () => {
     let filteredPlaces, filteredOutPlaces, allPlaces;
     if (this.state.query) {
@@ -117,6 +124,7 @@ class App extends Component {
     })
   }
 
+  // Function that creates instance of InfoWindow
   createInfoWindow = () => {
     let infoWindow = new this.state.google.maps.InfoWindow();
     infoWindow.setOptions({maxWidth: 250});
@@ -128,6 +136,7 @@ class App extends Component {
     })
   }
 
+  // Function that gets information about active place and opens InfoWindow for it
   openInfoWindow = () => {
     if (this.state.infoWindow === null) {
       this.createInfoWindow();
@@ -138,6 +147,7 @@ class App extends Component {
     this.getActivePlaceAdditionalInformation();
   }
 
+  // Function that fetch information about active place
   getActivePlaceAdditionalInformation = () => {
     let casinoId;
     let venueTip = "Couldn't get additional information regarding this venue.";
@@ -167,6 +177,7 @@ class App extends Component {
       });
   }
 
+  // Function that fills active place InfoWindow with details
   fillActivePlaceInfoWindow = (name, popularReview, venueLink) => {
     const details = document.createElement('div');
     details.className = 'info-window';
