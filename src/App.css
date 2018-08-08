@@ -42,7 +42,8 @@ footer {
 
 .elements-list {
   height: inherit;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .places-list {
@@ -70,6 +71,10 @@ footer {
 
 .places-list li button:active {
   transform: translateY(1px);
+}
+
+.places-list li button:hover {
+  cursor: pointer;
 }
 
 .elements-list-container.elements-list-opened {
@@ -125,4 +130,14 @@ footer {
   margin: 13px 0;
   text-align: center;
   color: #fff;
+}
+
+@media screen and (min-width: 701px) {
+  .elements-list-container {
+    transform: translate(0px, 0);
+  }
+
+  .nav-button {
+    display: none;
+  }
 }
