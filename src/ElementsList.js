@@ -23,9 +23,9 @@ class ElementsList extends Component {
                         placeholder='Filter places'
                         value={this.props.query}
                         onChange={(event) => this.props.updateQuery(event.target.value)}
-                        onFocusCapture={() => {
-                            $('.elements-list-container').toggleClass('elements-list-opened');
-                            $('.nav-button').toggleClass('elements-list-opened');
+                        onFocusCapture={(event) => {
+                            if (!$('.elements-list-container').hasClass('elements-list-opened')) $('.elements-list-container').toggleClass('elements-list-opened');
+                            if (!$('.nav-button').hasClass('elements-list-opened')) $('.nav-button').toggleClass('elements-list-opened');
                         }}
                     />
                     <ul className='places-list' aria-label='places'>

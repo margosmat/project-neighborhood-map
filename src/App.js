@@ -19,7 +19,7 @@ class App extends Component {
 
   onMapClick = () => {
     this.state.places.map((place) => place.setIcon(gambler));
-    this.state.infoWindow.close();
+    if (this.state.infoWindow !== null) this.state.infoWindow.close();
 
     $('.elements-list-container').removeClass('elements-list-opened');
     $('.nav-button').removeClass('elements-list-opened');
