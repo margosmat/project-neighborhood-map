@@ -173,7 +173,7 @@ class App extends Component {
         self.fillActivePlaceInfoWindow(self.state.activeMarker.name, venueTip, venueLink);
       })
       .catch(function(response) {
-        console.log('failed' + response);
+        alert('failed' + response);
       });
   }
 

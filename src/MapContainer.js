@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map } from 'google-maps-react';
 
 export class MapContainer extends Component {
     onMapClick = () => {
@@ -14,7 +14,7 @@ export class MapContainer extends Component {
         return (
             <div role='application'>
                 <Map
-                    google={this.props.google}
+                    google={window.google}
                     style={style}
                     initialCenter={{
                         lat: 36.1314692,
@@ -31,6 +31,4 @@ export class MapContainer extends Component {
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyAvwHBT6f5xufxYH1tbf62JfXqGeeZGgSE'
-})(MapContainer)
+export default MapContainer;
