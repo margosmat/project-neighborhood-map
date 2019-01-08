@@ -4,11 +4,13 @@ This is the repository for the project Neighborhood Map. Neighborhood Map is the
 
 ## Starting the app
 
-Prerequesites: NodeJS and npm installed.
+Prerequesites: NodeJS and npm installed, Google Maps API key and Foursquare API key.
 
 To get the app started:
 
 * install all project dependencies with `npm install`
+* insert the Google API key in public/index.html line 20
+* insert the Foursquare API keys in src/App.js line 157, 163
 * build the project with with `npm run build`
 * if you have not already installed, install serve with `npm install -g serve`
 * run the build server with `serve -s build`
@@ -19,7 +21,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Attributions
 
-Venues details are provided by [Forsquare](https://foursquare.com/).
+Venues details are provided by [Foursquare](https://foursquare.com/).
 Marker icons were made by [Freepik](http://www.freepik.com).
 
 ## Contributing
