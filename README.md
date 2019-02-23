@@ -9,8 +9,8 @@ Prerequesites: NodeJS and npm installed, Google Maps API key and Foursquare API 
 To get the app started:
 
 * install all project dependencies with `npm install`
-* insert the Google API key in public/index.html line 20
-* insert the Foursquare API keys in src/App.js line 157, 163
+* replace REACT_APP_SECRET1 with the Google API key in public/index.html
+* replace REACT_APP_SECRET2 and REACT_APP_SECRET3 with the Foursquare API clientId and clientSecret in src/App.js
 * build the project with with `npm run build`
 * if you have not already installed, install serve with `npm install -g serve`
 * run the build server with `serve -s build`
