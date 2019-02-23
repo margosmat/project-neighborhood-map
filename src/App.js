@@ -154,13 +154,13 @@ class App extends Component {
     let venueLink = '';
     let self = this;
 
-    fetch(`https://api.foursquare.com/v2/venues/search?ll=${this.state.activeMarker.position.lat()},${this.state.activeMarker.position.lng()}&intent=match&name=${this.state.activeMarker.name}&client_id=5QHRGKMWQFHFXKIN5PJ0RZLGZG3WBXU3CBRAADC3PMN1VGHZ&client_secret=4WG51XWB0RESPAUDETZOURFHV1EDQAFVNSR01F4WT3HOFLKA&v=20180731`)
+    fetch(`https://api.foursquare.com/v2/venues/search?ll=${this.state.activeMarker.position.lat()},${this.state.activeMarker.position.lng()}&intent=match&name=${this.state.activeMarker.name}&client_id=${process.env.REACT_APP_SECRET2}&client_secret=${process.env.REACT_APP_SECRET3}&v=20180731`)
       .then(response => response.json())
       .then(function(response) {
         if (response.meta.code === 200 && response.response.venues.length > 0) {
           casinoId = response.response.venues[0].id;
           venueLink = 'http://foursquare.com/v/' + casinoId;
-          return fetch(`https://api.foursquare.com/v2/venues/${casinoId}/tips?sort=popular&client_id=5QHRGKMWQFHFXKIN5PJ0RZLGZG3WBXU3CBRAADC3PMN1VGHZ&client_secret=4WG51XWB0RESPAUDETZOURFHV1EDQAFVNSR01F4WT3HOFLKA&v=20180731`);
+          return fetch(`https://api.foursquare.com/v2/venues/${casinoId}/tips?sort=popular&client_id=${process.env.REACT_APP_SECRET2}&client_secret=${process.env.REACT_APP_SECRET3}&v=20180731`);
         } else {
           self.fillActivePlaceInfoWindow(self.state.activeMarker.name, venueTip, venueLink);
         }
